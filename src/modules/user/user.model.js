@@ -55,7 +55,7 @@ const userSchema = mongoose.Schema(
       type: String,
       requierd: true,
       default: 'user',
-      enum: ['user', 'admin'],
+      enum: ['user', 'admin', 'super-admin'],
     },
     status: {
       type: 'String',
