@@ -1,5 +1,4 @@
 import { User } from './user.model.js';
-import bcrypt from 'bcryptjs';
 
 const createUserService = async (user) => {
   const existsUser = await User.findOne({ email: user.email });
@@ -11,8 +10,6 @@ const createUserService = async (user) => {
   const newUser = new User(user);
   const result = await newUser.save();
   return result;
-  // const payload = { user: { id: user.id } };
-  // const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
 };
 
 const loginUserService = async (email) => {
@@ -31,6 +28,10 @@ const getSingleUserService = async (id) => {
   return await User.findOne({ _id: id });
 };
 
+const getUserProfileService = async (email) => {
+  return await User.findOne({ email }).select('-password');
+};
+
 const deleteSingleUserService = async (id) => {
   return await User.findByIdAndDelete(id);
 };
@@ -39,9 +40,6 @@ const updateSingleUserService = async (id, updatedData) => {
   const user = await User.findById(id);
   if (!user) {
     throw new Error({ message: 'No User found.' });
-  }
-  if (!updatedData.imgURL) {
-    updatedData.imgURL = user.imgURL;
   }
   return await User.findByIdAndUpdate(id, updatedData, {
     new: true,
@@ -54,6 +52,7 @@ export const UserService = {
   loginUserService,
   getAllUserService,
   getSingleUserService,
+  getUserProfileService,
   deleteSingleUserService,
   updateSingleUserService,
 };

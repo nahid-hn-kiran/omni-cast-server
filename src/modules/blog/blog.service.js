@@ -14,7 +14,7 @@ const getSingleBlogService = async (id) => {
 };
 
 const deleteSingleBlogService = async (id) => {
-  return await Blog.findOneAndDelete(id);
+  return await Blog.findByIdAndDelete(id);
 };
 
 const updateSingleBlogService = async (id, updatedData) => {

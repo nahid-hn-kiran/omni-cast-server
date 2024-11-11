@@ -13,7 +13,5 @@ app.use(cors());
 
 // Routes
 app.use('/api/v1', [UserRoute, PodcastRoute, BlogRoute]);
-// app.use('/api/podcast', PodcastRoute);
-// app.use('/api/blog', BlogRoute);
 
 export default app;

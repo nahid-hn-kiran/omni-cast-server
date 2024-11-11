@@ -14,7 +14,7 @@ const getSinglePodcastService = async (id) => {
 };
 
 const deleteSinglePodcastService = async (id) => {
-  return await Podcast.findOneAndDelete(id);
+  return await Podcast.findByIdAndDelete(id);
 };
 
 const updateSinglePodcastService = async (id, updatedData) => {
